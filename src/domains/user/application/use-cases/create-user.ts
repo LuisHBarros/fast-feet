@@ -1,6 +1,6 @@
+import { UserRepository } from '@/database/repositories/user-repository';
 import { Either, left, right } from '../../../../core/either';
 import { User } from '../../domain/entities/user';
-import { UserRepository } from '../../domain/repository/user-repository';
 import { Encrypt } from '../util/encrypt';
 
 interface CreateUserDTO {
@@ -22,14 +22,12 @@ export class CreateUser {
             return left(new Error('User already exists'));
         }
         const hashedPassword = await Encrypt.genHash(user.password);
-        const newUser = User.create(
-            {
-                name: user.name,
-                document: user.document,
-                password: hashedPassword,
-                role: 'deliveryman',
-            },
-        );
+        const newUser = User.create({
+            name: user.name,
+            document: user.document,
+            password: hashedPassword,
+            role: 'deliveryman',
+        });
         await this.userRepository.save(newUser);
         return right(undefined);
     }

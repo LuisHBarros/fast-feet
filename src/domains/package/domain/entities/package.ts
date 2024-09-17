@@ -1,9 +1,9 @@
-import { Entity } from "@/core/entity/entity";
-import { UniqueEntityID } from "@/core/entity/unique-entity-id";
-import { Optional } from "@/core/types/optional";
+import { Entity } from '@/core/entity/entity';
+import { UniqueEntityID } from '@/core/entity/unique-entity-id';
+import { Optional } from '@/core/types/optional';
 
 interface PackageProps {
-    status: "pending" | "picked-up" | "delivered";
+    status: 'pending' | 'picked-up' | 'delivered';
     post: Date;
     pickUp?: Date | null;
     delivery?: Date | null;
@@ -28,7 +28,7 @@ export class Package extends Entity<PackageProps> {
     get location() {
         return this.props.location;
     }
-    set status(status: "pending" | "picked-up" | "delivered") {
+    set status(status: 'pending' | 'picked-up' | 'delivered') {
         this.props.status = status;
     }
     set post(post: Date) {
@@ -43,13 +43,31 @@ export class Package extends Entity<PackageProps> {
     set location(location: string) {
         this.props.location = location;
     }
+    get delivery_man_id() {
+        return this.props.delivery_man_id;
+    }
+    set delivery_man_id(id: UniqueEntityID | null) {
+        this.props.delivery_man_id = id;
+    }
+    get recipient_id() {
+        return this.props.recipient_id;
+    }
 
-        static create(props: Optional<PackageProps, "delivery" | "pickUp" | "delivery_man_id">, id?: string) {
-        return new Package({
-            ...props,
-            delivery: props.delivery ?? null,
-            pickUp: props.pickUp ?? null,
-            delivery_man_id: props.delivery_man_id ?? null,
-        }, new UniqueEntityID(id));
+    static create(
+        props: Optional<
+            PackageProps,
+            'delivery' | 'pickUp' | 'delivery_man_id'
+        >,
+        id?: string,
+    ) {
+        return new Package(
+            {
+                ...props,
+                delivery: props.delivery ?? null,
+                pickUp: props.pickUp ?? null,
+                delivery_man_id: props.delivery_man_id ?? null,
+            },
+            new UniqueEntityID(id),
+        );
     }
 }

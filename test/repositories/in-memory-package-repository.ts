@@ -18,4 +18,9 @@ export class InMemoryPackageRepository implements PackageRepository {
         if (index === -1) throw new Error('Package not found');
         this.packages[index] = data;
     }
+    findByDeliveryManId(id: string): Promise<Package[]> {
+        return Promise.resolve(
+            this.packages.filter((p) => p.delivery_man_id?.value === id),
+        );
+    }
 }
