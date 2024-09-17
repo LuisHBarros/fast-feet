@@ -12,9 +12,14 @@ export class InMemoryPackageRepository implements PackageRepository {
         this.packages.push(data);
     }
     async update(data: Package): Promise<void> {
+        console.log(
+            'ids',
+            this.packages.map((p) => p.id.value),
+        );
         const index = this.packages.findIndex(
             (p) => p.id.toString() === data.id.toString(),
         );
+
         if (index === -1) throw new Error('Package not found');
         this.packages[index] = data;
     }

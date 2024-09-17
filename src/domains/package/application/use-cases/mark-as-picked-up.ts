@@ -15,6 +15,7 @@ export class MarkAsPickedUp {
             dto.package_id,
         );
         if (!packageEntity) {
+            console.log('Package not found really');
             return left(new Error('Package not found'));
         }
         packageEntity.status = 'picked-up';
