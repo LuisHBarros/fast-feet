@@ -4,4 +4,6 @@ export abstract class RecipientRepository {
     abstract save(data: Recipient): Promise<void>;
     abstract findByID(id: string): Promise<Recipient | null>;
     abstract update(data: Recipient): Promise<void>;
+    abstract findByDocument(document: string): Recipient | null;
+    abstract findByEmail(email: string): Recipient | null;
 }

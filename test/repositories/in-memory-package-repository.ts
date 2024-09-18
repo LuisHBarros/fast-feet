@@ -4,6 +4,10 @@ import { Package } from '@/domains/package/domain/entities/package';
 export class InMemoryPackageRepository implements PackageRepository {
     private packages: Package[] = [];
 
+    async findAll(): Promise<Package[]> {
+        return this.packages;
+    }
+
     async findByID(id: string): Promise<Package | null> {
         console.log(
             'ids',

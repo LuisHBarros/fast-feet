@@ -2,10 +2,16 @@ import { RecipientRepository } from '@/database/repositories/recipient-repositor
 import { Recipient } from '@/domains/recipient/domain/entities/recipient';
 
 export class InMemoryRecipientRepository extends RecipientRepository {
-    private recipients: Recipient[] = [];
+    public recipients: Recipient[] = [];
 
     async findByID(id: string): Promise<Recipient | null> {
         return this.recipients.find((p) => p.id.toString() === id) || null;
+    }
+    findByDocument(document: string): Recipient | null {
+        return this.recipients.find((p) => p.document === document) || null;
+    }
+    findByEmail(email: string): Recipient | null {
+        return this.recipients.find((p) => p.email === email) || null;
     }
 
     async save(data: Recipient): Promise<void> {
