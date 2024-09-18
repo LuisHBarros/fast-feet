@@ -22,7 +22,9 @@ describe('test MarkAsPickedUp use case', () => {
             package_id: pack.id.value,
         });
         expect(result.isRight()).toBeTruthy();
-        expect(result.value).toEqual('picked-up');
+        if (result.isRight()) {
+            expect(result.value.status).toEqual('picked-up');
+        }
     });
     it('should not mark package as picked up if package not found', async () => {
         const result = await markAsPickedUp.execute({

@@ -26,7 +26,6 @@ describe('GetPackagesByDeliveryMan', () => {
             status: 'pending',
         });
         pack.delivery_man_id = new UniqueEntityID();
-        console.log('package ' + pack.delivery_man_id);
         packageRepository.save(pack);
         const result = await getPackagesByDeliveryMan.execute({
             user_id: pack.delivery_man_id.value,

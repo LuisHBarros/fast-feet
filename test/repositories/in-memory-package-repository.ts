@@ -5,7 +5,12 @@ export class InMemoryPackageRepository implements PackageRepository {
     private packages: Package[] = [];
 
     async findByID(id: string): Promise<Package | null> {
-        return this.packages.find((p) => p.id.toString() === id) || null;
+        console.log(
+            'ids',
+            this.packages.map((p) => p.id.value),
+        );
+        console.log('id', id);
+        return this.packages.find((p) => p.id.value === id) || null;
     }
 
     async save(data: Package): Promise<void> {

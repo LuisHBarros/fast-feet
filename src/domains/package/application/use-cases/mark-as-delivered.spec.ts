@@ -18,13 +18,16 @@ describe('Test MarkAsDelivered use case', () => {
             status: 'pending',
         });
         await packageRepository.save(pack);
+        console.log(
+            'package:ÇÇ ' + (await packageRepository.findByID(pack.id.value)),
+        );
         const result = await markAsDelivered.execute({
             package_id: pack.id.value,
             photo: 'photo',
         });
         expect(result.isRight()).toBeTruthy();
         if (result.value instanceof Package) {
-            expect(result.value).toEqual('delivered');
+            expect(result.value.status).toEqual('delivered');
         }
     });
     it('should not mark package as delivered if package not found', async () => {

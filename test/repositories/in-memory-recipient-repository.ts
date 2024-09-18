@@ -5,11 +5,6 @@ export class InMemoryRecipientRepository extends RecipientRepository {
     private recipients: Recipient[] = [];
 
     async findByID(id: string): Promise<Recipient | null> {
-        console.log('id', id);
-        console.log(
-            'recipients',
-            this.recipients.map((r) => r.id),
-        );
         return this.recipients.find((p) => p.id.toString() === id) || null;
     }
 
