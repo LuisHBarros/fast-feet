@@ -2,7 +2,7 @@ import { PackageRepository } from '@/database/repositories/package-repository';
 import { Package } from '@/domains/package/domain/entities/package';
 
 export class InMemoryPackageRepository implements PackageRepository {
-    private packages: Package[] = [];
+    public packages: Package[] = [];
 
     async findAll(): Promise<Package[]> {
         return this.packages;

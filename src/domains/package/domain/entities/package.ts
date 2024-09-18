@@ -3,7 +3,7 @@ import { UniqueEntityID } from '@/core/entity/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
 interface PackageProps {
-    status: 'pending' | 'picked-up' | 'delivered';
+    status: 'pending' | 'picked-up' | 'delivered' | 'return';
     post: Date;
     pickUp?: Date | null;
     delivery?: Date | null;
@@ -28,7 +28,7 @@ export class Package extends Entity<PackageProps> {
     get location() {
         return this.props.location;
     }
-    set status(status: 'pending' | 'picked-up' | 'delivered') {
+    set status(status: 'pending' | 'picked-up' | 'delivered' | 'return') {
         this.props.status = status;
     }
     set post(post: Date) {
