@@ -2,7 +2,7 @@ import { UserRepository } from '@/database/repositories/user-repository';
 import { User } from '@/domains/user/domain/entities/user';
 
 export class InMemoryUserRepository implements UserRepository {
-    private users: User[] = [];
+    public users: User[] = [];
 
     async delete(id: string): Promise<void> {
         this.users = this.users.filter((user) => user.id.value !== id);

@@ -15,7 +15,8 @@ describe('Test MarkAsDelivered use case', () => {
             location: 'location',
             post: new Date(),
             recipient_id: new UniqueEntityID(),
-            status: 'pending',
+            status: 'picked-up',
+            delivery_man_id: new UniqueEntityID(),
         });
         await packageRepository.save(pack);
         console.log(
@@ -24,6 +25,7 @@ describe('Test MarkAsDelivered use case', () => {
         const result = await markAsDelivered.execute({
             package_id: pack.id.value,
             photo: 'photo',
+            delivery_man_id: pack.delivery_man_id?.value as string,
         });
         expect(result.isRight()).toBeTruthy();
         if (result.value instanceof Package) {
@@ -34,6 +36,7 @@ describe('Test MarkAsDelivered use case', () => {
         const result = await markAsDelivered.execute({
             package_id: '1',
             photo: 'photo',
+            delivery_man_id: '1',
         });
         expect(result.isLeft()).toBeTruthy();
     });
