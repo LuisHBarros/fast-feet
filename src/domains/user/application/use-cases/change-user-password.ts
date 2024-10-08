@@ -1,25 +1,25 @@
-import { Either, left, right } from "@/core/either";
-import { UserRepository } from "../../domain/repository/user-repository";
-import { Encrypt } from "../util/encrypt";
+import { Either, left, right } from '@/core/either';
+import { Encrypt } from '../util/encrypt';
+import { UserRepository } from '@/database/repositories/user-repository';
 
-interface ChangeUserPasswordDTO{
+interface ChangeUserPasswordDTO {
     userId: string;
     oldPassword: string;
     newPassword: string;
 }
 type ChangeUserPasswordResponse = Promise<Either<Error, void>>;
 
-export class ChangeUserPassword{
-    constructor(private readonly userRepository: UserRepository){}
-    async execute(data: ChangeUserPasswordDTO): ChangeUserPasswordResponse{
+export class ChangeUserPassword {
+    constructor(private readonly userRepository: UserRepository) {}
+    async execute(data: ChangeUserPasswordDTO): ChangeUserPasswordResponse {
         const user = await this.userRepository.findById(data.userId);
-        if(!user){
+        if (!user) {
             return left(new Error('User not found'));
         }
-        if (!user.isAdmin()) { 
+        if (!user.isAdmin()) {
             return left(new Error('User is not an admin'));
         }
-        if(!(await Encrypt.compare(data.oldPassword, user.password))){
+        if (!(await Encrypt.compare(data.oldPassword, user.password))) {
             return left(new Error('Old password is incorrect'));
         }
         user.password = await Encrypt.genHash(data.newPassword);

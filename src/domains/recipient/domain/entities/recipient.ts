@@ -5,7 +5,7 @@ interface RecipientProps {
     name: string;
     document: string;
     email: string;
-    address: string;
+    address: string[];
     // address: UniqueEntityID;
 }
 
@@ -22,7 +22,7 @@ export class Recipient extends Entity<RecipientProps> {
         return this.props.email;
     }
 
-    get address(): string {
+    get address(): string[] {
         return this.props.address;
     }
 

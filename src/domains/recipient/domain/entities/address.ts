@@ -4,10 +4,13 @@ import { UniqueEntityID } from '@/core/entity/unique-entity-id';
 interface AddressProps {
     street: string;
     number: string;
-    complement: string;
     city: string;
     state: string;
-    zip: string;
+    country: string;
+    postalCode: string;
+    latitude: number;
+    longitude: number;
+    recipientId: string;
 }
 
 export class Address extends Entity<AddressProps> {
@@ -19,10 +22,6 @@ export class Address extends Entity<AddressProps> {
         return this.props.number;
     }
 
-    get complement(): string {
-        return this.props.complement;
-    }
-
     get city(): string {
         return this.props.city;
     }
@@ -31,8 +30,20 @@ export class Address extends Entity<AddressProps> {
         return this.props.state;
     }
 
-    get zip(): string {
-        return this.props.zip;
+    get postalCode(): string {
+        return this.props.postalCode;
+    }
+    get country(): string {
+        return this.props.country;
+    }
+    get latitude(): number {
+        return this.props.latitude;
+    }
+    get longitude(): number {
+        return this.props.longitude;
+    }
+    get recipientId(): string {
+        return this.props.recipientId;
     }
 
     public static create(props: AddressProps, id?: string): Address {

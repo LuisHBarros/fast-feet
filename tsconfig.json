@@ -3,13 +3,15 @@
         "require": ["tsconfig-paths/register"]
     },
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2022",
+    "target": "ES6",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
